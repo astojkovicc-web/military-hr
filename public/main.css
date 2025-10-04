@@ -6,17 +6,16 @@ body {
 }
 
 /* LEVA STRANA */
-
 .leva-strana {
-  height: 92.2vh;
+  height: 92.1vh;
 }
 
 .bg-primary {
-  background-color: #1793e6 !important;
+  background-color: #2a8cce !important;
 }
 
 .btn-primary {
-  background-color: #1793e6 !important;
+  background-color: #2a8cce !important;
 }
 
 .w-30 {
@@ -31,9 +30,9 @@ body {
 
 /* DESNA STRANA */
 .forma-pozadina {
-  background-color: rgba(0, 0, 0, 0.6); /* crna sa 60% opacity */
+  background-color: rgba(0, 0, 0, 0.6);
+  border-left: 1px solid black;
   padding: 2rem;
-  border-radius: 10px;
 }
 
 .profilna-slika {
