@@ -23,8 +23,8 @@ body {
 }
 
 .grb {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
   object-fit: contain;
 }
 
@@ -36,8 +36,8 @@ body {
 }
 
 .profilna-slika {
-  width: 180px;
-  height: 180px;
+  width: 130px;
+  height: 130px;
   object-fit: fill;
   border-radius: 50%;
 }
@@ -48,4 +48,17 @@ body {
 
 #pin::placeholder {
   color: #bebdbd;
+}
+
+/* ADMIN PANEL CSS */
+.hover-bg:hover {
+  background-color: rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.profilna-panel {
+  width: 40px;
+  height: 40px;
+  object-fit: fill;
+  border-radius: 50%;
 }

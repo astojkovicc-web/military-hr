@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>252 STAE</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      body {
+        background-image: none !important;
+      }
+      .hover-bg:hover,
+      .active-link {
+        background-color: rgba(0, 123, 255, 0.2);
+        color: black !important;
+      }
+      .profilna-panel {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVIGACIJA -->
+    <nav class="container-fluid bg-primary text-white py-2">
+      <div class="row">
+        <div
+          class="col-md-12 d-flex align-items-center justify-content-between px-4"
+        >
+          <div class="d-flex align-items-center">
+            <img
+              src="img/profilna.jpg"
+              alt="Profilna slika"
+              class="profilna-panel me-3"
+            />
+            <div class="d-flex flex-column">
+              <span class="fw-semibold fs-5">Aleksa Stojkovic</span>
+              <span class="text-danger">Administrator</span>
+            </div>
+          </div>
+          <a
+            href="index.html"
+            class="d-flex align-items-center border-start border-light ps-3 text-white text-decoration-none"
+          >
+            <i class="bi bi-arrow-bar-left fs-3"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- MAIN -->
+    <main class="container-fluid">
+      <div class="row">
+        <!-- SIDEBAR -->
+        <div class="col-md-2 bg-light min-vh-100 p-3">
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link text-dark fw-semibold text-center rounded px-2 py-2 hover-bg active-link"
+                href="24.html"
+                >24 VAZDUHOPLOVNOTEHNICKI BATALJON</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link text-dark fw-semibold text-center rounded px-2 py-2 hover-bg"
+                href="101.html"
+                >101 LOVACKO AVIJACIJSKA ESKADRILA</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link text-dark fw-semibold text-center rounded px-2 py-2 hover-bg"
+                href="252.html"
+                >252 SKOLSKO TRENAZNA AVIJACIJSKA ESKADRILA</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link text-dark fw-semibold text-center rounded px-2 py-2 hover-bg"
+                href="890.html"
+                >890 MESOVITA HELIHOPTERSKA ESKADRILA</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link text-dark fw-semibold text-center rounded px-2 py-2 hover-bg"
+                href="138.html"
+                >138 TRANSPORTNA AVIJACIJSKA ESKADRILA</a
+              >
+            </li>
+          </ul>
+        </div>
+        <!-- SIDEBAR END -->
+        <!-- TABELA -->
+        <div class="col-md-10 p-4">
+          <div
+            class="d-flex justify-content-between align-items-center mt-5 mb-4"
+          >
+            <h2 class="text-dark fs-3 mb-0">Lista pripadnika jedinice</h2>
+            <button
+              class="btn btn-warning text-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#dodajModal"
+            >
+              <i class="bi bi-plus-circle me-1"></i> Dodaj
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Ime i Prezime</th>
+                  <th scope="col">JMBG</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Školska sprema</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Telefon</th>
+                  <th scope="col">Akcije</th>
+                </tr>
+              </thead>
+              <tbody id="tabela"></tbody>
+              <template id="template">
+                <tr>
+                  <td class="rank"></td>
+                  <td class="ime"></td>
+                  <td class="jmbg"></td>
+                  <td class="status"></td>
+                  <td class="sprema"></td>
+                  <td class="email"></td>
+                  <td class="telefon"></td>
+                  <td>
+                    <button
+                      class="btn btn-sm btn-warning text-dark me-1 edit-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editModal"
+                    >
+                      <i class="bi bi-save"></i> Edit
+                    </button>
+                    <button class="btn btn-sm btn-danger delete-btn">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </template>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- MODAL DODAJ -->
+    <div
+      class="modal fade"
+      id="dodajModal"
+      tabindex="-1"
+      aria-labelledby="dodajModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dodajModalLabel">Dodaj korisnika</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="dodajForm">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label for="rank" class="form-label">Rank</label>
+                  <input type="text" class="form-control" id="rank" required />
+                </div>
+                <div class="col-md-6">
+                  <label for="ime" class="form-label">Ime i Prezime</label>
+                  <input type="text" class="form-control" id="ime" required />
+                </div>
+                <div class="col-md-3">
+                  <label for="jmbg" class="form-label">JMBG</label>
+                  <input type="text" class="form-control" id="jmbg" required />
+                </div>
+                <div class="col-md-4">
+                  <label for="status" class="form-label">Status</label>
+                  <input type="text" class="form-control" id="status" />
+                </div>
+                <div class="col-md-4">
+                  <label for="sprema" class="form-label">Školska sprema</label>
+                  <input type="text" class="form-control" id="sprema" />
+                </div>
+                <div class="col-md-4">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" />
+                </div>
+                <div class="col-md-4">
+                  <label for="telefon" class="form-label">Telefon</label>
+                  <input type="text" class="form-control" id="telefon" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Zatvori
+            </button>
+            <button
+              type="submit"
+              class="btn btn-warning text-dark"
+              form="dodajForm"
+            >
+              <i class="bi bi-save me-1"></i> Sačuvaj
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL EDIT -->
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Izmeni korisnika</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="editForm">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label for="editRank" class="form-label">Rank</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editRank"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="editIme" class="form-label">Ime i Prezime</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editIme"
+                    required
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label for="editJmbg" class="form-label">JMBG</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editJmbg"
+                    required
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label for="editStatus" class="form-label">Status</label>
+                  <input type="text" class="form-control" id="editStatus" />
+                </div>
+                <div class="col-md-4">
+                  <label for="editSprema" class="form-label"
+                    >Školska sprema</label
+                  >
+                  <input type="text" class="form-control" id="editSprema" />
+                </div>
+                <div class="col-md-4">
+                  <label for="editEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="editEmail" />
+                </div>
+                <div class="col-md-4">
+                  <label for="editTelefon" class="form-label">Telefon</label>
+                  <input type="text" class="form-control" id="editTelefon" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Zatvori
+            </button>
+            <button
+              type="submit"
+              class="btn btn-warning text-dark"
+              form="editForm"
+            >
+              <i class="bi bi-save me-1"></i> Sačuvaj
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
