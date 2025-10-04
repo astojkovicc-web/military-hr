@@ -1,0 +1,52 @@
+body {
+  font-family: "Roboto", sans-serif !important;
+  background-image: url("img/pozadina.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* LEVA STRANA */
+
+.leva-strana {
+  height: 92.2vh;
+}
+
+.bg-primary {
+  background-color: #1793e6 !important;
+}
+
+.btn-primary {
+  background-color: #1793e6 !important;
+}
+
+.w-30 {
+  width: 280px;
+}
+
+.grb {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+}
+
+/* DESNA STRANA */
+.forma-pozadina {
+  background-color: rgba(0, 0, 0, 0.6); /* crna sa 60% opacity */
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.profilna-slika {
+  width: 180px;
+  height: 180px;
+  object-fit: fill;
+  border-radius: 50%;
+}
+
+#pin {
+  color: white;
+}
+
+#pin::placeholder {
+  color: #bebdbd;
+}
