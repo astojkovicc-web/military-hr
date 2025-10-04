@@ -1,13 +1,12 @@
 package com.stojkovic.aleksa.entity;
 
-public class Employee {
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "pripadnik")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -15,7 +14,7 @@ public class Pripadnik {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
+    @Column(name = "pripadnik_id")
     private Integer id;
 
     @Column(nullable = false)
@@ -32,8 +31,12 @@ public class Pripadnik {
     private String telefon;
 
     @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
+    @JoinColumn(name = "jedinica_id")
+    private Jedinica jedinica;
 
+    private LocalDateTime postavljenAt;
+    private LocalDateTime izmenjenoAt;
+
+    @JsonIgnore
     private LocalDateTime deletedAt;
 }

@@ -1,4 +1,9 @@
 package com.stojkovic.aleksa.repo;
 
-public class PripadnikRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.stojkovic.aleksa.entity.Pripadnik;
+import java.util.List;
+
+public interface PripadnikRepository extends JpaRepository<Pripadnik, Integer> {
+    List<Pripadnik> findAllByJedinica_JedinicaIdAndDeletedAtIsNull(Integer jedinicaId);
 }
