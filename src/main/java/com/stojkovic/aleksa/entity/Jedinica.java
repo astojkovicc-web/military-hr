@@ -1,5 +1,6 @@
 package com.stojkovic.aleksa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,8 @@ public class Jedinica {
     @Column(nullable = false)
     private String naziv;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "jedinica", cascade = CascadeType.ALL)
     private List<Pripadnik> pripadnici;
 }
+

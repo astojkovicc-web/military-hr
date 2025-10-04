@@ -2,6 +2,7 @@ package com.stojkovic.aleksa.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.stojkovic.aleksa.entity.Pripadnik;
 import com.stojkovic.aleksa.repo.PripadnikRepository;
@@ -18,8 +19,13 @@ public class PripadnikController {
     private final PripadnikRepository repository;
 
     @GetMapping
-    public List<Pripadnik> getAll() {
-        return repository.findAll();
+    public List<Pripadnik> getCustomer() {
+        return repository.findAllByDeletedAtIsNull();
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Pripadnik> getCustomerById(@PathVariable Integer id) {
+        return ResponseEntity.of(repository.findById(id));
     }
 
     @GetMapping("/jedinica/{jedinicaId}")
@@ -27,24 +33,11 @@ public class PripadnikController {
         return repository.findAllByJedinica_JedinicaIdAndDeletedAtIsNull(jedinicaId);
     }
 
-    @GetMapping("/{id}")
-    public Pripadnik getById(@PathVariable Integer id) {
-        return repository.findById(id).orElseThrow();
-    }
-
     @PostMapping
     public Pripadnik save(@RequestBody Pripadnik model) {
-        model.setPostavljenAt(LocalDateTime.now());
-        model.setIzmenjenoAt(null);
-        model.setDeletedAt(null);
-        return repository.save(model);
-    }
-
-    @PutMapping("/{id}")
-    public Pripadnik update(@PathVariable Integer id, @RequestBody Pripadnik model) {
-        Pripadnik pripadnik = repository.findById(id).orElseThrow();
-        pripadnik.setFirstName(model.getFirstName());
-        pripadnik.setLastName(model.getLastName());
+        Pripadnik pripadnik = new Pripadnik();
+        pripadnik.setIme(model.getIme());
+        pripadnik.setPrezime(model.getPrezime());
         pripadnik.setRank(model.getRank());
         pripadnik.setStatus(model.getStatus());
         pripadnik.setSprema(model.getSprema());
@@ -52,7 +45,23 @@ public class PripadnikController {
         pripadnik.setEmail(model.getEmail());
         pripadnik.setTelefon(model.getTelefon());
         pripadnik.setJedinica(model.getJedinica());
-        pripadnik.setIzmenjenoAt(LocalDateTime.now());
+        pripadnik.setUpdatedAt(LocalDateTime.now());
+        return repository.save(pripadnik);
+    }
+
+    @PutMapping("/{id}")
+    public Pripadnik update(@PathVariable Integer id, @RequestBody Pripadnik model) {
+        Pripadnik pripadnik = repository.findById(id).orElseThrow();
+        pripadnik.setIme(model.getIme());
+        pripadnik.setPrezime(model.getPrezime());
+        pripadnik.setRank(model.getRank());
+        pripadnik.setStatus(model.getStatus());
+        pripadnik.setSprema(model.getSprema());
+        pripadnik.setJmbg(model.getJmbg());
+        pripadnik.setEmail(model.getEmail());
+        pripadnik.setTelefon(model.getTelefon());
+        pripadnik.setJedinica(model.getJedinica());
+        pripadnik.setUpdatedAt(LocalDateTime.now());
         return repository.save(pripadnik);
     }
 

@@ -331,5 +331,96 @@
       crossorigin="anonymous"
     ></script>
     <script src="script.js"></script>
+    <script>
+      let table = document.querySelector("#tabela");
+      let temp = document.querySelector("#template");
+
+      // modal elementi
+      let editModal = document.querySelector("#editModal");
+      let editRank = document.querySelector("#editRank");
+      let editFirstName = document.querySelector("#editFirstName");
+      let editLastName = document.querySelector("#editLastName");
+      let editJMBG = document.querySelector("#editJMBG");
+      let editStatus = document.querySelector("#editStatus");
+      let editSprema = document.querySelector("#editSprema");
+      let editEmail = document.querySelector("#editEmail");
+      let editTelefon = document.querySelector("#editTelefon");
+      let saveEdit = document.querySelector("#saveEdit");
+
+      let currentEditingId = null;
+
+      axios.get("/api/pripadnik").then((rsp) => {
+        rsp.data.forEach((pripadnik) => {
+          const copy = temp.content.cloneNode(true);
+
+          copy.querySelector(".rank").innerText = pripadnik.rank;
+          copy.querySelector(
+            ".ime"
+          ).innerText = `${pripadnik.firstName} ${pripadnik.lastName}`;
+          copy.querySelector(".jmbg").innerText = pripadnik.jmbg;
+          copy.querySelector(".status").innerText = pripadnik.status;
+          copy.querySelector(".sprema").innerText = pripadnik.sprema;
+          copy.querySelector(".email").innerText = pripadnik.email;
+          copy.querySelector(".telefon").innerText = pripadnik.telefon;
+
+          // EDIT dugme
+          copy.querySelector(".edit").addEventListener("click", () => {
+            // popuni modal sa trenutnim podacima
+            currentEditingId = pripadnik.id;
+            editRank.value = pripadnik.rank;
+            editFirstName.value = pripadnik.firstName;
+            editLastName.value = pripadnik.lastName;
+            editJMBG.value = pripadnik.jmbg;
+            editStatus.value = pripadnik.status;
+            editSprema.value = pripadnik.sprema;
+            editEmail.value = pripadnik.email;
+            editTelefon.value = pripadnik.telefon;
+
+            // prikaži modal
+            editModal.style.display = "block";
+          });
+
+          // DELETE dugme
+          copy.querySelector(".delete").addEventListener("click", () => {
+            if (
+              !confirm(
+                `Da li stvarno zelite da obrisete: ${pripadnik.firstName} ${pripadnik.lastName}?`
+              )
+            )
+              return;
+
+            axios
+              .delete(`/api/pripadnik/${pripadnik.id}`)
+              .then(() => window.location.reload());
+          });
+
+          table.appendChild(copy);
+        });
+      });
+
+      // SAVE EDIT dugme u modalu
+      saveEdit.addEventListener("click", () => {
+        if (!currentEditingId) return;
+
+        const updatedData = {
+          rank: editRank.value,
+          firstName: editFirstName.value,
+          lastName: editLastName.value,
+          jmbg: editJMBG.value,
+          status: editStatus.value,
+          sprema: editSprema.value,
+          email: editEmail.value,
+          telefon: editTelefon.value,
+        };
+
+        axios
+          .put(`/api/pripadnik/${currentEditingId}`, updatedData)
+          .then(() => {
+            editModal.style.display = "none"; // sakrij modal
+            window.location.reload(); // reload tabele
+          })
+          .catch((err) => console.error(err));
+      });
+    </script>
   </body>
 </html>
