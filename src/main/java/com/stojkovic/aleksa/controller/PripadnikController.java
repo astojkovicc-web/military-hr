@@ -19,12 +19,12 @@ public class PripadnikController {
     private final PripadnikRepository repository;
 
     @GetMapping
-    public List<Pripadnik> getCustomer() {
+    public List<Pripadnik> getPripadnik() {
         return repository.findAllByDeletedAtIsNull();
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Pripadnik> getCustomerById(@PathVariable Integer id) {
+    public ResponseEntity<Pripadnik> getPripadnikById(@PathVariable Integer id) {
         return ResponseEntity.of(repository.findById(id));
     }
 
@@ -45,7 +45,7 @@ public class PripadnikController {
         pripadnik.setEmail(model.getEmail());
         pripadnik.setTelefon(model.getTelefon());
         pripadnik.setJedinica(model.getJedinica());
-        pripadnik.setUpdatedAt(LocalDateTime.now());
+        pripadnik.setCreatedAt(LocalDateTime.now());
         return repository.save(pripadnik);
     }
 
