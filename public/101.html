@@ -425,11 +425,16 @@
             jedinica: { jedinicaId: Number(editJedinicaId.value) },
           })
           .then((res) => {
-            console.log("Uspesno sacuvano:", res.data);
+            alert(
+              "Uspesna izmena nad pripadnikom: " +
+                res.data.ime +
+                " " +
+                res.data.prezime
+            );
             editModal.hide();
             window.location.reload();
           })
-          .catch((err) => console.error("Greska pri update:", err));
+          .catch((err) => console.error("Greska pri izmeni:", err));
       });
 
       // POST DODAJ MODAL
@@ -451,7 +456,12 @@
             },
           })
           .then((res) => {
-            console.log("Uspesno dodat pripadnik:", res.data);
+            alert(
+              "Uspesno dodat pripadnik: " +
+                res.data.ime +
+                " " +
+                res.data.prezime
+            );
             dodajForm.reset();
             bootstrap.Modal.getInstance(
               document.querySelector("#dodajModal")
