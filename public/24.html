@@ -367,15 +367,15 @@
               axios
                 .get(`/api/pripadnik/${izabranZaIzmenuId}`)
                 .then((rsp) => {
-                  editRank.value = rsp.data.rank;
-                  editIme.value = rsp.data.ime;
-                  editPrezime.value = rsp.data.prezime;
-                  editJMBG.value = rsp.data.jmbg;
-                  editStatus.value = rsp.data.status;
-                  editSprema.value = rsp.data.sprema;
-                  editEmail.value = rsp.data.email;
-                  editTelefon.value = rsp.data.telefon;
-                  editJedinicaId.value = rsp.data.jedinica?.jedinicaId || "";
+                  editRank.value = pripadnik.rank;
+                  editIme.value = pripadnik.ime;
+                  editPrezime.value = pripadnik.prezime;
+                  editJMBG.value = pripadnik.jmbg;
+                  editStatus.value = pripadnik.status;
+                  editSprema.value = pripadnik.sprema;
+                  editEmail.value = pripadnik.email;
+                  editTelefon.value = pripadnik.telefon;
+                  editJedinicaId.value = pripadnik.jedinica?.jedinicaId || "";
                   editModal.show();
                 })
                 .catch((err) =>
@@ -425,11 +425,16 @@
             jedinica: { jedinicaId: Number(editJedinicaId.value) },
           })
           .then((res) => {
-            console.log("Uspesno sacuvano:", res.data);
+            alert(
+              "Uspesna izmena nad pripadnikom: " +
+                res.data.ime +
+                " " +
+                res.data.prezime
+            );
             editModal.hide();
             window.location.reload();
           })
-          .catch((err) => console.error("Greska pri update:", err));
+          .catch((err) => console.error("Greska pri izmeni:", err));
       });
 
       // POST DODAJ MODAL
@@ -451,7 +456,12 @@
             },
           })
           .then((res) => {
-            console.log("Uspesno dodat pripadnik:", res.data);
+            alert(
+              "Uspesno dodat pripadnik: " +
+                res.data.ime +
+                " " +
+                res.data.prezime
+            );
             dodajForm.reset();
             bootstrap.Modal.getInstance(
               document.querySelector("#dodajModal")
