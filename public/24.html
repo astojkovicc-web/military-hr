@@ -37,7 +37,6 @@
     </style>
   </head>
   <body>
-    <!-- NAVIGACIJA -->
     <nav class="container-fluid bg-primary text-white py-2">
       <div class="row">
         <div
@@ -63,10 +62,9 @@
         </div>
       </div>
     </nav>
-    <!-- MAIN -->
+
     <main class="container-fluid">
       <div class="row">
-        <!-- SIDEBAR -->
         <div class="col-md-2 bg-light min-vh-100 p-3">
           <ul class="nav flex-column">
             <li class="nav-item mb-2">
@@ -106,8 +104,7 @@
             </li>
           </ul>
         </div>
-        <!-- SIDEBAR END -->
-        <!-- TABELA -->
+
         <div class="col-md-10 p-4">
           <div
             class="d-flex justify-content-between align-items-center mt-5 mb-4"
@@ -147,15 +144,13 @@
                   <td class="telefon"></td>
                   <td>
                     <button
-                      class="btn btn-sm btn-warning text-dark me-1 edit-btn"
+                      class="btn btn-sm btn-warning text-dark me-1 edit"
                       data-bs-toggle="modal"
                       data-bs-target="#editModal"
                     >
                       <i class="bi bi-save"></i> Edit
                     </button>
-                    <button class="btn btn-sm btn-danger delete-btn">
-                      Delete
-                    </button>
+                    <button class="btn btn-sm btn-danger delete">Delete</button>
                   </td>
                 </tr>
               </template>
@@ -164,23 +159,17 @@
         </div>
       </div>
     </main>
-    <!-- MODAL DODAJ -->
-    <div
-      class="modal fade"
-      id="dodajModal"
-      tabindex="-1"
-      aria-labelledby="dodajModalLabel"
-      aria-hidden="true"
-    >
+
+    <!-- Dodaj modal -->
+    <div class="modal fade" id="dodajModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="dodajModalLabel">Dodaj pripadnika</h5>
+            <h5 class="modal-title">Dodaj pripadnika</h5>
             <button
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"
             ></button>
           </div>
           <div class="modal-body">
@@ -190,9 +179,18 @@
                   <label for="rank" class="form-label">Rank</label>
                   <input type="text" class="form-control" id="rank" required />
                 </div>
-                <div class="col-md-6">
-                  <label for="ime" class="form-label">Ime i Prezime</label>
+                <div class="col-md-3">
+                  <label for="ime" class="form-label">Ime</label>
                   <input type="text" class="form-control" id="ime" required />
+                </div>
+                <div class="col-md-3">
+                  <label for="prezime" class="form-label">Prezime</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="prezime"
+                    required
+                  />
                 </div>
                 <div class="col-md-3">
                   <label for="jmbg" class="form-label">JMBG</label>
@@ -230,77 +228,58 @@
               class="btn btn-warning text-dark"
               form="dodajForm"
             >
-              <i class="bi bi-save me-1"></i> Sačuvaj
+              Sačuvaj
             </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- MODAL EDIT -->
-    <div
-      class="modal fade"
-      id="editModal"
-      tabindex="-1"
-      aria-labelledby="editModalLabel"
-      aria-hidden="true"
-    >
+
+    <!-- Edit modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel">Izmeni pripadnika</h5>
+            <h5 class="modal-title">Izmeni pripadnika</h5>
             <button
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"
             ></button>
           </div>
           <div class="modal-body">
             <form id="editForm">
               <div class="row g-3">
                 <div class="col-md-3">
-                  <label for="editRank" class="form-label">Rank</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="editRank"
-                    required
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label for="editIme" class="form-label">Ime i Prezime</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="editIme"
-                    required
-                  />
+                  <label class="form-label">Rank</label>
+                  <input type="text" class="form-control" id="editRank" />
                 </div>
                 <div class="col-md-3">
-                  <label for="editJmbg" class="form-label">JMBG</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="editJmbg"
-                    required
-                  />
+                  <label class="form-label">Ime</label>
+                  <input type="text" class="form-control" id="editIme" />
                 </div>
-                <div class="col-md-4">
-                  <label for="editStatus" class="form-label">Status</label>
+                <div class="col-md-3">
+                  <label class="form-label">Prezime</label>
+                  <input type="text" class="form-control" id="editPrezime" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">JMBG</label>
+                  <input type="text" class="form-control" id="editJMBG" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Status</label>
                   <input type="text" class="form-control" id="editStatus" />
                 </div>
-                <div class="col-md-4">
-                  <label for="editSprema" class="form-label"
-                    >Školska sprema</label
-                  >
+                <div class="col-md-3">
+                  <label class="form-label">Školska sprema</label>
                   <input type="text" class="form-control" id="editSprema" />
                 </div>
-                <div class="col-md-4">
-                  <label for="editEmail" class="form-label">Email</label>
+                <div class="col-md-3">
+                  <label class="form-label">Email</label>
                   <input type="email" class="form-control" id="editEmail" />
                 </div>
-                <div class="col-md-4">
-                  <label for="editTelefon" class="form-label">Telefon</label>
+                <div class="col-md-3">
+                  <label class="form-label">Telefon</label>
                   <input type="text" class="form-control" id="editTelefon" />
                 </div>
               </div>
@@ -315,31 +294,34 @@
               Zatvori
             </button>
             <button
-              type="submit"
+              type="button"
               class="btn btn-warning text-dark"
-              form="editForm"
+              id="saveEdit"
             >
-              <i class="bi bi-save me-1"></i> Sačuvaj
+              Sačuvaj
             </button>
           </div>
         </div>
       </div>
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+      const JEDINICA_ID = 1; // ID jedinice, primer: 24 bataljon
+
       let table = document.querySelector("#tabela");
       let temp = document.querySelector("#template");
 
-      // modal elementi
-      let editModal = document.querySelector("#editModal");
+      let editModalEl = document.querySelector("#editModal");
+      let editModal = new bootstrap.Modal(editModalEl);
       let editRank = document.querySelector("#editRank");
-      let editFirstName = document.querySelector("#editFirstName");
-      let editLastName = document.querySelector("#editLastName");
+      let editIme = document.querySelector("#editIme");
+      let editPrezime = document.querySelector("#editPrezime");
       let editJMBG = document.querySelector("#editJMBG");
       let editStatus = document.querySelector("#editStatus");
       let editSprema = document.querySelector("#editSprema");
@@ -349,77 +331,52 @@
 
       let currentEditingId = null;
 
+      // Popuni tabelu
       axios.get("/api/pripadnik").then((rsp) => {
         rsp.data.forEach((pripadnik) => {
           const copy = temp.content.cloneNode(true);
 
           copy.querySelector(".rank").innerText = pripadnik.rank;
-          copy.querySelector(
-            ".ime"
-          ).innerText = `${pripadnik.firstName} ${pripadnik.lastName}`;
+          copy.querySelector(".ime").innerText =
+            pripadnik.ime + " " + pripadnik.prezime;
           copy.querySelector(".jmbg").innerText = pripadnik.jmbg;
           copy.querySelector(".status").innerText = pripadnik.status;
           copy.querySelector(".sprema").innerText = pripadnik.sprema;
           copy.querySelector(".email").innerText = pripadnik.email;
           copy.querySelector(".telefon").innerText = pripadnik.telefon;
 
-          // EDIT dugme
           copy.querySelector(".edit").addEventListener("click", () => {
-            // popuni modal sa trenutnim podacima
             currentEditingId = pripadnik.id;
             editRank.value = pripadnik.rank;
-            editFirstName.value = pripadnik.firstName;
-            editLastName.value = pripadnik.lastName;
+            editIme.value = pripadnik.ime;
+            editPrezime.value = pripadnik.prezime;
             editJMBG.value = pripadnik.jmbg;
             editStatus.value = pripadnik.status;
             editSprema.value = pripadnik.sprema;
             editEmail.value = pripadnik.email;
             editTelefon.value = pripadnik.telefon;
 
-            // prikaži modal
-            editModal.style.display = "block";
+            editModal.show();
           });
 
-          // DELETE dugme
           copy.querySelector(".delete").addEventListener("click", () => {
             if (
               !confirm(
-                `Da li stvarno zelite da obrisete: ${pripadnik.firstName} ${pripadnik.lastName}?`
+                `Da li stvarno zelite da obrisete: ${pripadnik.ime} ${pripadnik.prezime}?`
               )
             )
               return;
 
             axios
-              .delete(`/api/pripadnik/${pripadnik.id}`)
+              .request({
+                url: `api/pripadnik/${pripadnik.id}`,
+                method: "delete",
+              })
               .then(() => window.location.reload());
           });
 
           table.appendChild(copy);
         });
-      });
-
-      // SAVE EDIT dugme u modalu
-      saveEdit.addEventListener("click", () => {
-        if (!currentEditingId) return;
-
-        const updatedData = {
-          rank: editRank.value,
-          firstName: editFirstName.value,
-          lastName: editLastName.value,
-          jmbg: editJMBG.value,
-          status: editStatus.value,
-          sprema: editSprema.value,
-          email: editEmail.value,
-          telefon: editTelefon.value,
-        };
-
-        axios
-          .put(`/api/pripadnik/${currentEditingId}`, updatedData)
-          .then(() => {
-            editModal.style.display = "none"; // sakrij modal
-            window.location.reload(); // reload tabele
-          })
-          .catch((err) => console.error(err));
       });
     </script>
   </body>
